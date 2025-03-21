@@ -10,7 +10,7 @@ export type Event = {
 };
 
 export const Events: CollectionConfig = {
-  slug: "event",
+  slug: "events",
   labels: {
     singular: {
       fr: "Événement",
