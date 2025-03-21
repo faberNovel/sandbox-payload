@@ -8,14 +8,15 @@ import config from "@/payload.config";
 import "./styles.css";
 import { User, UserRole } from "@/collections/Users";
 import { LogoutButton } from "./components/LogoutButton";
+import { HelloButton } from "./components/HelloButton";
 // import { LogoutButton } from "./components/LogoutButton";
 
 const fileURL = `vscode://file/${fileURLToPath(import.meta.url)}`;
 
 const avatars: Record<UserRole, string> = {
   admin: "👑",
-  contributor: "🎨",
-  validator: "🔍",
+  editor: "🎨",
+  reviewer: "🔍",
   user: "👤",
 };
 
@@ -69,14 +70,7 @@ export default async function HomePage() {
               Go to admin panel
             </a>
           )}
-          <a
-            className="docs"
-            href="https://payloadcms.com/docs"
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            Documentation
-          </a>
+          <HelloButton />
         </div>
       </div>
       <div className="footer">
