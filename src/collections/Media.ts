@@ -4,7 +4,7 @@ export const Media: CollectionConfig = {
   slug: "media",
   versions: true, // payload has native versioning
   access: {
-    read: () => true,
+    read: ({ req }) => (req.user && "role" in req.user ? req.user.role === "admin" : false),
   },
   fields: [
     {

@@ -5,6 +5,7 @@ export const Event: CollectionConfig = {
   admin: {
     useAsTitle: "name",
   },
+  versions: true, // payload has native versioning
   access: {
     read: ({ req }) => {
       // Tous les rôles peuvent lire

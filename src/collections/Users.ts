@@ -1,6 +1,25 @@
 import type { CollectionConfig } from "payload";
 
-export type UserRole = "admin" | "contributor" | "validator";
+const userRoleOptions = [
+  {
+    label: "Administrateur",
+    value: "admin",
+  },
+  {
+    label: "Contributeur",
+    value: "editor",
+  },
+  {
+    label: "Validateur",
+    value: "reviewer",
+  },
+  {
+    label: "User",
+    value: "user",
+  },
+];
+
+export type UserRole = (typeof userRoleOptions)[number]["value"];
 
 export interface User {
   id: string;
@@ -16,7 +35,7 @@ export const Users: CollectionConfig = {
   auth: true,
   access: {
     read: ({ req }) => (req.user && "role" in req.user ? req.user.role === "admin" : false),
-    update: ({ req }) => req.user?.id === req.query.id,
+    update: ({ req }) => req.user?.id === req.query.id || req.user?.role === "admin",
     delete: () => false,
   },
   fields: [
@@ -25,20 +44,7 @@ export const Users: CollectionConfig = {
     {
       name: "role",
       type: "select",
-      options: [
-        {
-          label: "Administrateur",
-          value: "admin",
-        },
-        {
-          label: "Contributeur",
-          value: "contributor",
-        },
-        {
-          label: "Validateur",
-          value: "validator",
-        },
-      ],
+      options: userRoleOptions,
       required: true,
       defaultValue: "contributor", // Default role
       hidden: false, // Ensure the role is visible in API responses
