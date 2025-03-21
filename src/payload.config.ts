@@ -11,6 +11,9 @@ import { Users } from "./collections/Users";
 import { Media } from "./collections/Media";
 import Event from "./collections/Event";
 
+import { en } from "@payloadcms/translations/languages/en";
+import { fr } from "@payloadcms/translations/languages/fr";
+
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
 
@@ -20,6 +23,25 @@ export default buildConfig({
     importMap: {
       baseDir: path.resolve(dirname),
     },
+  },
+  i18n: {
+    translations: { en, fr },
+    supportedLanguages: { en, fr },
+    fallbackLanguage: "en",
+  },
+  localization: {
+    locales: [
+      {
+        label: "English",
+        code: "en",
+      },
+      {
+        label: "Français",
+        code: "fr",
+      },
+    ],
+    defaultLocale: "en",
+    fallback: true,
   },
   collections: [Users, Media, Event],
   editor: lexicalEditor(),

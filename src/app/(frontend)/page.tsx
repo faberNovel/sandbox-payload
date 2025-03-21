@@ -32,10 +32,10 @@ export default async function HomePage() {
   const user = res.user as User | null;
 
   const SIZE_DIVIDER = 4;
-  const imageUrl = "http://localhost:9000/assets/image.high.jpg";
-  const imageResponse = await fetch(imageUrl);
-  const imageBlob = await imageResponse.blob();
-  const imageSizeKB = (imageBlob.size / 1024).toFixed(2);
+  // const imageUrl = "http://localhost:9000/assets/image.high.jpg";
+  // const imageResponse = await fetch(imageUrl);
+  // const imageBlob = await imageResponse.blob();
+  // const imageSizeKB = (imageBlob.size / 1024).toFixed(2);
 
   return (
     <div className="home">
@@ -46,8 +46,8 @@ export default async function HomePage() {
       )}
 
       <div className="content">
-        <Image alt="Mask" height={750 / SIZE_DIVIDER} src={imageUrl} width={565 / SIZE_DIVIDER} />
-        <p>Image size: {imageSizeKB} KB</p>
+        {/* <Image alt="Mask" height={750 / SIZE_DIVIDER} src={imageUrl} width={565 / SIZE_DIVIDER} />
+        <p>Image size: {imageSizeKB} KB</p> */}
         {!user && <h1>Welcome to Payload POC.</h1>}
         {user && <h1>Welcome back, {user.email}</h1>}
         <div className="links">

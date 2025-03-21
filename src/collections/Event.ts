@@ -2,6 +2,16 @@ import type { AccessArgs, CollectionConfig } from "payload";
 
 export const Event: CollectionConfig = {
   slug: "event",
+  labels: {
+    singular: {
+      fr: "Événement",
+      en: "Event",
+    },
+    plural: {
+      fr: "Événements",
+      en: "Events",
+    },
+  },
   admin: {
     useAsTitle: "name",
   },
@@ -28,28 +38,30 @@ export const Event: CollectionConfig = {
     {
       name: "name",
       type: "text",
-      label: "Nom de l'événement",
+      localized: true,
+      label: { fr: "Nom de l'événement", en: "Event name" },
       required: true,
     },
     {
       name: "type",
       type: "select",
-      label: "Type d'événement",
+      localized: true,
+      label: { fr: "Type d'événement", en: "Event type" },
       options: [
         {
-          label: "Conférence",
+          label: { fr: "Conférence", en: "Conference" },
           value: "conference",
         },
         {
-          label: "Exposition",
+          label: { fr: "Exposition", en: "Exhibition" },
           value: "exhibition",
         },
         {
-          label: "Atelier",
+          label: { fr: "Atelier", en: "Workshop" },
           value: "workshop",
         },
         {
-          label: "Autre",
+          label: { fr: "Autre", en: "Other" },
           value: "other",
         },
       ],
@@ -58,13 +70,15 @@ export const Event: CollectionConfig = {
     {
       name: "startDate",
       type: "date",
-      label: "Date de début",
+      localized: true,
+      label: { fr: "Date de début", en: "Start date" },
       required: true,
     },
     {
       name: "endDate",
       type: "date",
-      label: "Date de fin",
+      localized: true,
+      label: { fr: "Date de fin", en: "End date" },
       required: true,
     },
   ],
