@@ -1,5 +1,5 @@
 :root {
-  --font-mono: 'Roboto Mono', monospace;
+  --font-mono: "Roboto Mono", monospace;
 }
 
 * {
@@ -104,6 +104,12 @@ svg {
     padding: 24px;
   }
 
+  .role {
+    position: absolute;
+    right: 32px;
+    top: 32px;
+  }
+
   .content {
     display: flex;
     flex-direction: column;
@@ -121,7 +127,13 @@ svg {
     align-items: center;
     gap: 12px;
 
-    a {
+    button {
+      font-size: 18px;
+      line-height: 32px;
+    }
+
+    a,
+    button {
       text-decoration: none;
       padding: 0.25rem 0.5rem;
       border-radius: 4px;
