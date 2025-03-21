@@ -9,7 +9,7 @@ import sharp from "sharp";
 
 import { Users } from "./collections/Users";
 import { Media } from "./collections/Media";
-import Event from "./collections/Event";
+import Events from "./collections/Events";
 
 import { en } from "@payloadcms/translations/languages/en";
 import { fr } from "@payloadcms/translations/languages/fr";
@@ -43,7 +43,7 @@ export default buildConfig({
     defaultLocale: "en",
     fallback: true,
   },
-  collections: [Users, Media, Event],
+  collections: [Users, Media, Events],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || "",
   typescript: {

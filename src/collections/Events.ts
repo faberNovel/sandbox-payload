@@ -1,6 +1,15 @@
 import type { AccessArgs, CollectionConfig } from "payload";
 
-export const Event: CollectionConfig = {
+export type EventType = "conference" | "exhibition" | "workshop" | "other";
+
+export type Event = {
+  name: string;
+  type: EventType;
+  startDate: string;
+  endDate: string;
+};
+
+export const Events: CollectionConfig = {
   slug: "event",
   labels: {
     singular: {
@@ -22,15 +31,12 @@ export const Event: CollectionConfig = {
       return !!req.user;
     },
     create: ({ req: { user } }: AccessArgs) => {
-      // Seuls les admins et éditeurs peuvent créer
       return user?.role === "admin" || user?.role === "editor";
     },
     update: ({ req: { user } }: AccessArgs) => {
-      // Seuls les admins, éditeurs et reviewers peuvent modifier
       return user?.role === "admin" || user?.role === "editor" || user?.role === "reviewer";
     },
     delete: ({ req: { user } }: AccessArgs) => {
-      // Seuls les admins peuvent supprimer
       return user?.role === "admin";
     },
   },
@@ -84,4 +90,4 @@ export const Event: CollectionConfig = {
   ],
 };
 
-export default Event;
+export default Events;

@@ -6,7 +6,10 @@ const logout = async () => {
 };
 
 export const LogoutButton = () => (
-  <button className="docs" onClick={logout}>
+  <button
+    className="rounded-sm border-1 px-4 hover:bg-white hover:text-black cursor-pointer m-2"
+    onClick={logout}
+  >
     Logout
   </button>
 );

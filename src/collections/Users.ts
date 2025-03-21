@@ -34,9 +34,11 @@ export const Users: CollectionConfig = {
   },
   auth: true,
   access: {
-    read: ({ req }) => (req.user && "role" in req.user ? req.user.role === "admin" : false),
+    // read: ({ req }) =>
+    //   req.user && "role" in req.user ? req.user.role === "admin" : req.user?.id === req.query.id,
     update: ({ req }) => req.user?.id === req.query.id || req.user?.role === "admin",
-    delete: () => false,
+    delete: ({ req }) => req.user?.role === "admin",
+    create: ({ req }) => req.user?.role === "admin",
   },
   fields: [
     // Email added by default

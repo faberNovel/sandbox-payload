@@ -1,17 +1,15 @@
-import { headers as getHeaders } from "next/headers.js";
+import React from "react";
 import Image from "next/image";
 import { getPayload } from "payload";
-import React from "react";
-import { fileURLToPath } from "url";
+import { headers as getHeaders } from "next/headers.js";
 
 import config from "@/payload.config";
 import "./styles.css";
 import { User, UserRole } from "@/collections/Users";
 import { LogoutButton } from "./components/LogoutButton";
 import { HelloButton } from "./components/HelloButton";
-// import { LogoutButton } from "./components/LogoutButton";
-
-const fileURL = `vscode://file/${fileURLToPath(import.meta.url)}`;
+import EventCard from "@/components/EventCard";
+import { Event } from "@/collections/Events"; // Import the Event type
 
 const avatars: Record<UserRole, string> = {
   admin: "👑",
@@ -31,6 +29,14 @@ export default async function HomePage() {
   const res = await payload.auth({ headers });
   const user = res.user as User | null;
 
+  // Fetch events
+  const eventsResponse = await payload.find({
+    collection: "events", // Replace with the actual collection name for events
+    limit: 10, // Adjust the limit as needed
+  });
+
+  const events: Event[] = eventsResponse.docs; // Type the events array
+
   const SIZE_DIVIDER = 4;
   // const imageUrl = "http://localhost:9000/assets/image.high.jpg";
   // const imageResponse = await fetch(imageUrl);
@@ -40,9 +46,12 @@ export default async function HomePage() {
   return (
     <div className="home">
       {user && (
-        <h2 className="role">
-          {capitalizeFirstLetter(user.role)} {avatars[user.role]} <LogoutButton />
-        </h2>
+        <div className="absolute top-0 right-0 p-8">
+          <h2 className="font-bold text-center">
+            {capitalizeFirstLetter(user.role)} {avatars[user.role]}
+          </h2>{" "}
+          <LogoutButton />
+        </div>
       )}
 
       <div className="content">
@@ -74,10 +83,14 @@ export default async function HomePage() {
         </div>
       </div>
       <div className="footer">
-        <p>Update this page by editing</p>
-        <a className="codeLink" href={fileURL}>
-          <code>app/(frontend)/page.tsx</code>
-        </a>
+        <div>
+          <h1>Events</h1>
+          <div className="flex flex-wrap gap-4">
+            {events?.map((event, index) => (
+              <EventCard key={index} event={event} rights={res.permissions.collections?.events} />
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );
