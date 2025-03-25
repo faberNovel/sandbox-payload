@@ -40,5 +40,5 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# database
-quai-branly-events.db
+# ignore the sqlite db file
+*.db 
