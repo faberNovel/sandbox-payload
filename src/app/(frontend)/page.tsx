@@ -1,15 +1,19 @@
 import React from "react";
-import Image from "next/image";
+// import Image from "next/image";
 import { getPayload } from "payload";
 import { headers as getHeaders } from "next/headers.js";
 
-import config from "@/payload.config";
+import config from "@payload-config";
 import "./styles.css";
-import { User, UserRole } from "@/collections/Users";
-import { LogoutButton } from "./components/LogoutButton";
-import { HelloButton } from "./components/HelloButton";
-import EventCard from "@/components/EventCard";
-import { Event } from "@/collections/Events"; // Import the Event type
+import { User, UserRole } from "@/collections/Users.js";
+import { LogoutButton } from "./components/LogoutButton.js";
+import { HelloButton } from "./components/HelloButton.js";
+import EventCard from "@/components/EventCard.js";
+import { Event } from "@/collections/Events.js"; // Import the Event type
+// import { fileURLToPath } from "url";
+// import { LogoutButton } from "./components/LogoutButton";
+
+// const fileURL = `vscode://file/${fileURLToPath(import.meta.url)}`;
 
 const avatars: Record<UserRole, string> = {
   admin: "👑",
@@ -35,9 +39,9 @@ export default async function HomePage() {
     limit: 10, // Adjust the limit as needed
   });
 
-  const events: Event[] = eventsResponse.docs; // Type the events array
+  const events: Event[] = eventsResponse.docs as Event[]; // Type the events array
 
-  const SIZE_DIVIDER = 4;
+  // const SIZE_DIVIDER = 4;
   // const imageUrl = "http://localhost:9000/assets/image.high.jpg";
   // const imageResponse = await fetch(imageUrl);
   // const imageBlob = await imageResponse.blob();
